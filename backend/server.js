@@ -2,10 +2,12 @@ import express from 'express'
 import dontenv from  'dotenv'
 import connectDB from './config/db.js'
 import productRoutes from './routes/productroutes.js' 
+import userRoutes from './routes/userRoutes.js' 
 import  'colors'
 import {notFound,errorHandler} from './middleware/errorHandler.js'
 const app=express()
 
+app.use(express.json())
 
 dontenv.config()
 connectDB()
@@ -14,6 +16,7 @@ app.get('/',(req,res)=>{
 })
 
 app.use('/api/products',productRoutes)
+app.use('/api/user',userRoutes)
 app.use(notFound)
 app.use(errorHandler)
 
